@@ -1,1 +1,175 @@
-test
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Template</title>
+    <link rel="shortcut icon" href="https://bulletlink.com/bl-icon.png?v=94392708333">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- fontAwesome-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+    <style>
+        header {
+            background-image: radial-gradient(circle, #0085ff, #006dc6, #00558e, #173c5a, #1c232a);
+        }
+        
+        .frame {
+            border: none;
+            display: block;
+            min-height: 100vh;
+            padding-top: 50px;
+        }
+        
+        .frame-up {
+            padding-top: 0;
+        }
+        
+        #frame-panel {
+            position: fixed;
+            top: 0;
+        }
+        
+        .bl-icons i {
+            color: #8a94a4
+        }
+        
+        .fa.fa-mobile {
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        
+        .fa.fa-tablet {
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+        
+        .fa.fa-desktop {
+            font-size: 1.7rem;
+            cursor: pointer;
+        }
+        
+        .bl-hide {
+            position: fixed;
+            right: 1rem;
+            top: 0;
+        }
+        
+        .bl-hide span {
+            border-color: #8a94a4 !important;
+            position: absolute;
+            top: -1rem;
+            right: 0;
+            background: #1b2630;
+        }
+        
+        .bl-hide i {
+            color: #8a94a4;
+            padding-top: 1rem;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+        
+        .bl-hide span:hover {
+            border-color: #fff;
+        }
+        
+        .bl-hide span:hover i {
+            color: #fff;
+        }
+        
+        .frame-mobile {
+            width: 392px;
+            min-height: 812px;
+        }
+        
+        .frame-tablet {
+            width: 785px;
+            min-height: 1024px;
+        }
+        
+        .mobile-active,
+        .tablet-active,
+        .desktop-active {
+            color: white !important;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header container-fluid bg-primary text-white d-flex align-items-center py-2" id="frame-panel">
+        <div class="bl-template-number fw-bold text-white d-inline-block w-25">Template #</div>
+        <div class="bl-icons d-inline-block w-50 text-center">
+            <i class="fa fa-mobile me-3" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Mobile"></i>
+            <i class="fa fa-tablet me-3" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tablet"></i>
+            <i class="fa fa-desktop desktop-active" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Desktop"></i>
+        </div>
+        <div class="bl-choose d-inline-block"><button type="button" class="btn btn-warning" style="font-size: 0.8rem;"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Select Template</button></div>
+    </header>
+    <div class="bl-hide d-inline-block">
+        <span class="bl-hide-span p-2 border" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hide Panel" style="cursor: pointer;"><i class="fa fa-caret-up" aria-hidden="true"></i></span>
+    </div>
+    <div class="d-flex justify-content-center">
+        <iframe id="frame" class="frame" src="#" sandbox="allow-forms allow-same-origin allow-scripts allow-top-navigation allow-popups" width="100%" height="400px"></iframe>
+    </div>
+    <script>
+        var url = location.href;
+        var a = new URL(url);
+        var t = a.searchParams.get("t");
+        document.getElementById('frame').src = "https://bulletlink.com/template-" + t;
+        document.title = "Template #" + t;
+        document.getElementsByClassName('bl-template-number')[0].innerHTML = "Template #" + t;
+        document.getElementsByClassName('bl-hide-span')[0].addEventListener('click', function() {
+            var hd = document.getElementsByClassName('header')[0];
+            if (hd.classList.contains('d-flex')) {
+                hd.classList.add('d-none');
+                hd.classList.remove('d-flex');
+                document.getElementById('frame').classList.add('frame-up');
+            } else {
+                hd.classList.add('d-flex');
+                hd.classList.remove('d-none');
+                document.getElementById('frame').classList.remove('frame-up');
+            }
+        }, );
+        document.getElementsByClassName('fa-mobile')[0].addEventListener('click', function() {
+            document.getElementsByClassName('fa-mobile')[0].classList.add('mobile-active');
+            document.getElementsByClassName('fa-tablet')[0].classList.remove('tablet-active');
+            document.getElementsByClassName('fa-desktop')[0].classList.remove('desktop-active');
+            document.getElementById('frame').classList.add('frame-mobile');
+            document.getElementById('frame').classList.remove('frame-tablet');
+            var iframe = document.getElementById('frame');
+            iframe.src = iframe.src;
+        });
+        document.getElementsByClassName('fa-tablet')[0].addEventListener('click', function() {
+            document.getElementsByClassName('fa-mobile')[0].classList.remove('mobile-active');
+            document.getElementsByClassName('fa-tablet')[0].classList.add('tablet-active');
+            document.getElementsByClassName('fa-desktop')[0].classList.remove('desktop-active');
+            document.getElementById('frame').classList.add('frame-tablet');
+            document.getElementById('frame').classList.remove('frame-mobile');
+            var iframe = document.getElementById('frame');
+            iframe.src = iframe.src;
+        });
+        document.getElementsByClassName('fa-desktop')[0].addEventListener('click', function() {
+            document.getElementsByClassName('fa-mobile')[0].classList.remove('mobile-active');
+            document.getElementsByClassName('fa-tablet')[0].classList.remove('tablet-active');
+            document.getElementsByClassName('fa-desktop')[0].classList.add('desktop-active');
+            document.getElementById('frame').classList.remove('frame-tablet');
+            document.getElementById('frame').classList.remove('frame-mobile');
+            var iframe = document.getElementById('frame');
+            iframe.src = iframe.src;
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+</body>
+
+</html>
