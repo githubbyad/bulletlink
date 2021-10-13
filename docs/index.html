@@ -7,6 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Template</title>
     <link rel="shortcut icon" href="https://bulletlink.com/bl-icon.png?v=94392708333">
+    <script>
+        var url = location.href;
+        var a = new URL(url);
+        var t = a.searchParams.get("t");
+        if (window.screen.width < 1024) {
+            window.location.href = "https://bulletlink.com/template-" + t;
+        }
+    </script>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
@@ -117,12 +125,12 @@
         <iframe id="frame" class="frame" src="#" sandbox="allow-forms allow-same-origin allow-scripts allow-top-navigation allow-popups" width="100%" height="400px"></iframe>
     </div>
     <script>
-        var url = location.href;
-        var a = new URL(url);
-        var t = a.searchParams.get("t");
         document.getElementById('frame').src = "https://bulletlink.com/template-" + t;
         document.title = "Template #" + t;
         document.getElementsByClassName('bl-template-number')[0].innerHTML = "Template #" + t;
+        document.getElementsByClassName('bl-choose')[0].addEventListener('click', function() {
+            window.open('https://bulletlink.com/index0.htm?twindow=Form&smenu=115&pform=Buy_Newspaper_Template&minForm=Y&mad=No&sname=target_form2.asp&site=bulletlink.com&sitex=Template-' + t, '_blank')
+        });
         document.getElementsByClassName('bl-hide-span')[0].addEventListener('click', function() {
             var hd = document.getElementsByClassName('header')[0];
             if (hd.classList.contains('d-flex')) {
